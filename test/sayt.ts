@@ -1,4 +1,4 @@
-/// <reference path="../src/all.d.ts" />
+/// <reference path="../custom-typings/index.d.ts" />
 
 import { expect } from 'chai';
 import utils = require('../src/utils/index');
