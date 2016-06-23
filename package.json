@@ -1,6 +1,6 @@
 {
   "name": "sayt",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Client for the SAYT API.",
   "typescript": {
     "definition": "build/sayt.d.ts"
