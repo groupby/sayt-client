@@ -1,0 +1,17 @@
+.*
+coverage/
+build/
+test/
+typings/
+src/
+gulpfile.js
+
+*.json
+*.yml
+*.conf.js
+
+dist/*
+!dist/commonjs
+
+dist/commonjs/**/*.d.ts
+!dist/commonjs/sayt.d.ts

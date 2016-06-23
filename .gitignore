@@ -1,0 +1,12 @@
+.vscode/launch.json
+.DS_Store
+.tmp
+.idea
+tmp
+node_modules
+npm-debug.log
+typings
+src/**/*.js
+test/**/*.js
+coverage
+dist
