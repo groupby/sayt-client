@@ -1,4 +1,4 @@
-/// <reference path="../typings/index.d.ts"/>
+/// <reference path="./all.d.ts"/>
 
 require('es6-promise').polyfill();
 require('./polyfills').pollyfill();

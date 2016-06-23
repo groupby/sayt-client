@@ -1,4 +1,4 @@
-import axios = require('axios');
+import { jsonp } from '../utils/index';
 
 const SAYT_URL = '.groupbycloud.com/api/v1/sayt/search';
 
@@ -23,40 +23,72 @@ export class Sayt {
 
   autocomplete(query: string = '', config?: IQueryTimeAutocompleteConfig, cb?: SearchCallback): Axios.IPromise<Axios.AxiosXHR<any>> {
     const finalConfig = Object.assign({ collection: this.config.collection }, this.config.autocomplete, config);
-    const response = axios({
-      url: this.url,
-      method: 'get',
-      data: {
-        query,
-        collection: finalConfig.collection,
-        searchItems: finalConfig.numSearchTerms,
-        navigationItems: finalConfig.numNavigations,
-        alphabetize: finalConfig.sortAlphabetically,
-        fuzzy: finalConfig.fuzzyMatch,
+    const response = jsonp(this.url, {
+      query,
+      collection: finalConfig.collection,
+      searchItems: finalConfig.numSearchTerms,
+      navigationItems: finalConfig.numNavigations,
+      alphabetize: finalConfig.sortAlphabetically,
+      fuzzy: finalConfig.fuzzyMatch,
 
-        productItems: 0
-      }
-    }).then(res => res.data);
+      productItems: 0
+    });
+    // const response = jsonp(`${this.url}?${qs.stringify({
+    //   query,
+    //   collection: finalConfig.collection,
+    //   searchItems: finalConfig.numSearchTerms,
+    //   navigationItems: finalConfig.numNavigations,
+    //   alphabetize: finalConfig.sortAlphabetically,
+    //   fuzzy: finalConfig.fuzzyMatch,
+    //
+    //   productItems: 0
+    // })}`, (err, data) => {
+    //
+    // });
+    // const response = axios({
+    //   url: this.url,
+    //   method: 'get',
+    //   data: {
+    //     query,
+    //     collection: finalConfig.collection,
+    //     searchItems: finalConfig.numSearchTerms,
+    //     navigationItems: finalConfig.numNavigations,
+    //     alphabetize: finalConfig.sortAlphabetically,
+    //     fuzzy: finalConfig.fuzzyMatch,
+    //
+    //     productItems: 0
+    //   }
+    // }).then(res => res.data);
 
     return this.callbackOrPromise(response, cb);
   }
 
   productSearch(query: string = '', config?: IQueryTimeProductSearchConfig, cb?: SearchCallback) {
     const finalConfig = Object.assign({ collection: this.config.collection }, this.config.productSearch, config);
-    const response = axios({
-      url: this.url,
-      method: 'get',
-      data: {
-        query,
-        collection: finalConfig.collection,
-        area: finalConfig.area,
-        refinements: finalConfig.refinements,
-        productItems: finalConfig.numProducts,
+    const response = jsonp(this.url, {
+      query,
+      collection: finalConfig.collection,
+      area: finalConfig.area,
+      refinements: finalConfig.refinements,
+      productItems: finalConfig.numProducts,
 
-        searchItems: 0,
-        navigationItems: 0
-      }
-    }).then(res => res.data);
+      searchItems: 0,
+      navigationItems: 0
+    });
+    // const response = axios({
+    //   url: this.url,
+    //   method: 'get',
+    //   data: {
+    //     query,
+    //     collection: finalConfig.collection,
+    //     area: finalConfig.area,
+    //     refinements: finalConfig.refinements,
+    //     productItems: finalConfig.numProducts,
+    //
+    //     searchItems: 0,
+    //     navigationItems: 0
+    //   }
+    // }).then(res => res.data);
 
     return this.callbackOrPromise(response, cb);
   }
