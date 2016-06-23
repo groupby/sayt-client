@@ -4,5 +4,4 @@ deployment:
     owner: groupby
     commands:
       - echo "//registry.npmjs.org/:_authToken=${NPM_API_KEY}" > ~/.npmrc
-      - gulp build
       - npm publish

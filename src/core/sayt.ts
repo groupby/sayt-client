@@ -1,6 +1,6 @@
 import axios = require('axios');
 
-const SAYT_URL = '.groubycloud.com/api/v1/sayt/search';
+const SAYT_URL = '.groupbycloud.com/api/v1/sayt/search';
 
 export class Sayt {
 

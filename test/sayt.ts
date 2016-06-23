@@ -6,7 +6,7 @@ import { Sayt } from '../src/core/sayt';
 
 const CLIENT_KEY = 'XXX-XXX-XXX-XXX';
 const CUSTOMER_ID = 'services';
-const SAYT_URL = `http://${CUSTOMER_ID}.groubycloud.com/api/v1/sayt/search`;
+const SAYT_URL = `http://${CUSTOMER_ID}.groupbycloud.com/api/v1/sayt/search`;
 
 describe('SAYT', () => {
   let sayt: Sayt;
