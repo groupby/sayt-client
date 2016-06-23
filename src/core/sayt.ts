@@ -21,7 +21,7 @@ export class Sayt {
     this.config = finalConfig;
   }
 
-  autocomplete(query: string = '', config?: IQueryTimeAutocompleteConfig, cb?: SearchCallback): Axios.IPromise<Axios.AxiosXHR<any>> {
+  autocomplete(query: string = '', config?: IQueryTimeAutocompleteConfig, cb?: SearchCallback): Promise<any> {
     const finalConfig = Object.assign({ collection: this.config.collection }, this.config.autocomplete, config);
     const response = jsonp(this.url, {
       query,
@@ -33,37 +33,11 @@ export class Sayt {
 
       productItems: 0
     });
-    // const response = jsonp(`${this.url}?${qs.stringify({
-    //   query,
-    //   collection: finalConfig.collection,
-    //   searchItems: finalConfig.numSearchTerms,
-    //   navigationItems: finalConfig.numNavigations,
-    //   alphabetize: finalConfig.sortAlphabetically,
-    //   fuzzy: finalConfig.fuzzyMatch,
-    //
-    //   productItems: 0
-    // })}`, (err, data) => {
-    //
-    // });
-    // const response = axios({
-    //   url: this.url,
-    //   method: 'get',
-    //   data: {
-    //     query,
-    //     collection: finalConfig.collection,
-    //     searchItems: finalConfig.numSearchTerms,
-    //     navigationItems: finalConfig.numNavigations,
-    //     alphabetize: finalConfig.sortAlphabetically,
-    //     fuzzy: finalConfig.fuzzyMatch,
-    //
-    //     productItems: 0
-    //   }
-    // }).then(res => res.data);
 
     return this.callbackOrPromise(response, cb);
   }
 
-  productSearch(query: string = '', config?: IQueryTimeProductSearchConfig, cb?: SearchCallback) {
+  productSearch(query: string = '', config?: IQueryTimeProductSearchConfig, cb?: SearchCallback): Promise<any> {
     const finalConfig = Object.assign({ collection: this.config.collection }, this.config.productSearch, config);
     const response = jsonp(this.url, {
       query,
@@ -75,25 +49,11 @@ export class Sayt {
       searchItems: 0,
       navigationItems: 0
     });
-    // const response = axios({
-    //   url: this.url,
-    //   method: 'get',
-    //   data: {
-    //     query,
-    //     collection: finalConfig.collection,
-    //     area: finalConfig.area,
-    //     refinements: finalConfig.refinements,
-    //     productItems: finalConfig.numProducts,
-    //
-    //     searchItems: 0,
-    //     navigationItems: 0
-    //   }
-    // }).then(res => res.data);
 
     return this.callbackOrPromise(response, cb);
   }
 
-  private callbackOrPromise(promise: Axios.IPromise<any>, cb: Function) {
+  private callbackOrPromise(promise: Promise<any>, cb: Function): Promise<any> {
     let response = promise;
     if (typeof cb == 'function') {
       response = promise.then(res => cb(undefined, res))
@@ -131,4 +91,4 @@ export interface IProductSearchConfig {
 
 export type IQueryTimeAutocompleteConfig = IAutocompleteConfig & { collection?: string };
 export type IQueryTimeProductSearchConfig = IProductSearchConfig & { collection?: string, refinements?: string };
-export type SearchCallback = (err: Error, res?: Axios.AxiosXHR<any>) => void;
+export type SearchCallback = (err: Error, res?: any) => void;
