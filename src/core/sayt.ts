@@ -25,6 +25,7 @@ export class Sayt {
     const finalConfig = Object.assign({ collection: this.config.collection }, this.config.autocomplete, config);
     const response = jsonp(this.url, {
       query,
+      area: finalConfig.area,
       collection: finalConfig.collection,
       searchItems: finalConfig.numSearchTerms,
       navigationItems: finalConfig.numNavigations,
