@@ -1,16 +1,13 @@
-/// <reference path="../custom-typings/index.d.ts" />
-
-import { expect } from 'chai';
-import utils = require('../src/utils/index');
 import { Sayt } from '../src/core/sayt';
+import utils = require('../src/utils/index');
+import { expect } from 'chai';
 
-const CLIENT_KEY = 'XXX-XXX-XXX-XXX';
 const CUSTOMER_ID = 'services';
 const SAYT_URL = `http://${CUSTOMER_ID}.groupbycloud.com/api/v1/sayt/search`;
 
 describe('SAYT', () => {
-  let sayt: Sayt,
-    backupJsonp;
+  let sayt: Sayt;
+  let backupJsonp;
 
   beforeEach(() => {
     backupJsonp = utils.jsonp;
@@ -30,7 +27,7 @@ describe('SAYT', () => {
   });
 
   describe('autocomplete()', () => {
-    it('should send autocomplete query', done => {
+    it('should send autocomplete query', (done) => {
       utils.jsonp = (url, body) => {
         expect(url).to.equal(SAYT_URL);
         expect(body.query).to.equal('skirts');
@@ -44,7 +41,7 @@ describe('SAYT', () => {
         .then(() => done());
     });
 
-    it('should configure autocomplete query', done => {
+    it('should configure autocomplete query', (done) => {
       sayt.configure({ autocomplete: { numSearchTerms: 4, sortAlphabetically: true } });
       utils.jsonp = (url, body) => {
         expect(body.searchItems).to.equal(4);
@@ -57,7 +54,7 @@ describe('SAYT', () => {
         .then(() => done());
     });
 
-    it('should allow query-time configuration', done => {
+    it('should allow query-time configuration', (done) => {
       sayt.configure({ autocomplete: { numSearchTerms: 4, sortAlphabetically: true } });
       utils.jsonp = (url, body) => {
         expect(body.searchItems).to.equal(8);
@@ -71,7 +68,7 @@ describe('SAYT', () => {
   });
 
   describe('productSearch()', () => {
-    it('should send product search query', done => {
+    it('should send product search query', (done) => {
       utils.jsonp = (url, body) => {
         expect(url).to.equal(SAYT_URL);
         expect(body.query).to.equal('hats');
@@ -85,7 +82,7 @@ describe('SAYT', () => {
         .then(() => done());
     });
 
-    it('should configure autocomplete query', done => {
+    it('should configure autocomplete query', (done) => {
       sayt.configure({ productSearch: { numProducts: 8, area: 'Other' } });
       utils.jsonp = (url, body) => {
         expect(body.area).to.equal('Other');
@@ -97,7 +94,7 @@ describe('SAYT', () => {
         .then(() => done());
     });
 
-    it('should allow query-time configuration', done => {
+    it('should allow query-time configuration', (done) => {
       utils.jsonp = (url, body) => {
         expect(body.area).to.equal('dev');
         expect(body.productItems).to.equal(5);
