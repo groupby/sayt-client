@@ -2,6 +2,7 @@
   "name": "sayt",
   "version": "0.1.1",
   "description": "Client for the SAYT API.",
+  "typings": "dist/commonjs/sayt.d.ts",
   "typescript": {
     "definition": "build/sayt.d.ts"
   },
@@ -10,7 +11,6 @@
     "test": "test"
   },
   "scripts": {
-    "other": "karma start",
     "test": "gulp build && karma start",
     "ci": "gulp clean:typings && gulp typings:install && karma start --singleRun=false"
   },
@@ -75,6 +75,7 @@
   },
   "dependencies": {
     "es6-promise": "^3.1.2",
+    "filter-object": "^2.1.0",
     "jsonp": "^0.2.0",
     "qs": "^6.2.0"
   }

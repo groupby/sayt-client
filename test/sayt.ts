@@ -11,8 +11,7 @@ describe('SAYT', () => {
 
   beforeEach(() => {
     backupJsonp = utils.jsonp;
-    sayt = new Sayt();
-    sayt.configure({ subdomain: CUSTOMER_ID });
+    sayt = new Sayt({ subdomain: CUSTOMER_ID });
   });
 
   afterEach(() => {

@@ -17,13 +17,14 @@ gulp.task('typescript:build', function() {
       paths.src + '/**/*.ts',
       paths.src + '/**/*.d.ts',
       paths.test + '/**/*.ts'
-    ], { base: paths.src })
+    ], {
+      base: paths.src
+    })
     .pipe(sourcemaps.init())
     .pipe(ts(tsProject));
 
   return merge([
     tsResult.dts
-    // .pipe(concat('index.d.ts'))
     .pipe(gulp.dest(paths.dist.commonjs)),
     tsResult.js
     .pipe(sourcemaps.write())

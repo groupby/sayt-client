@@ -1,4 +1,5 @@
 import { jsonp } from '../utils/index';
+import filterObject = require('filter-object');
 
 const SAYT_URL = '.groupbycloud.com/api/v1/sayt/search';
 
@@ -14,11 +15,14 @@ export class Sayt {
     }
   };
 
-  configure(config: SaytConfig = this.config) {
-    const finalConfig = Object.assign({}, this.config, config);
-    finalConfig.autocomplete = Object.assign({}, this.config.autocomplete, config.autocomplete ? config.autocomplete : {});
-    finalConfig.productSearch = Object.assign({}, this.config.productSearch, config.productSearch ? config.productSearch : {});
-    this.config = finalConfig;
+  constructor(config?: SaytConfig) {
+    this.configure(config);
+  }
+
+  configure(config: SaytConfig = {}) {
+    Object.assign(this.config, filterObject(config, '!{autocomplete,productSearch}'));
+    Object.assign(this.config.autocomplete, config.autocomplete || {});
+    Object.assign(this.config.productSearch, config.productSearch || {});
   }
 
   autocomplete(query: string = '', config?: IQueryTimeAutocompleteConfig, cb?: SearchCallback): Promise<any> {

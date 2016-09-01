@@ -5,6 +5,6 @@ declare interface IOptions {
   prefix?: string;
   name?: string;
 }
-declare module "jsonp" {
+declare module 'jsonp' {
   export = jsonp;
 }
