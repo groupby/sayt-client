@@ -10,3 +10,4 @@ src/**/*.js
 test/**/*.js
 coverage
 dist
+docs
