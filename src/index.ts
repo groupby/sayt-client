@@ -1,4 +1,4 @@
 require('es6-promise').polyfill();
-require('./polyfills').pollyfill();
+require('es6-object-assign').polyfill();
 
 export * from './core/sayt';

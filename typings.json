@@ -6,8 +6,7 @@
     "es6-shim": "registry:dt/es6-shim#0.31.2+20160602141504",
     "mocha": "github:DefinitelyTyped/DefinitelyTyped/mocha/mocha.d.ts#855569dbc86b619aa3bbfab98f3ff2e6b55b5fcd",
     "node": "github:DefinitelyTyped/DefinitelyTyped/node/node.d.ts#855569dbc86b619aa3bbfab98f3ff2e6b55b5fcd",
-    "qs": "registry:dt/qs#6.2.0+20160707010053",
-    "sinon": "github:DefinitelyTyped/DefinitelyTyped/sinon/sinon.d.ts#6a24a980eddf0c5b43e1aee82d6ae5ecba5abd86"
+    "qs": "registry:dt/qs#6.2.0+20160707010053"
   },
   "dependencies": {
     "es6-promise": "registry:npm/es6-promise#3.0.0+20160723033700",

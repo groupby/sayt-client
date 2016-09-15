@@ -1,2 +1,2 @@
 require('es6-promise').polyfill();
-require('../src/polyfills').pollyfill();
+require('es6-object-assign').polyfill();

@@ -5,10 +5,11 @@ typings/
 custom_typings/
 all_typings/
 src/
+docs/
 
 *.json
 *.yml
 *.conf.js
 *.config.js
 
-!dist/
+dist/test
