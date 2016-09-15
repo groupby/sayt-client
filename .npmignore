@@ -1,19 +1,14 @@
 .*
 coverage/
-build/
 test/
 typings/
 custom_typings/
 all_typings/
 src/
-gulpfile.js
 
 *.json
 *.yml
 *.conf.js
+*.config.js
 
-dist/*
-!dist/commonjs
-
-dist/commonjs/**/*.d.ts
-!dist/commonjs/sayt.d.ts
+!dist/
