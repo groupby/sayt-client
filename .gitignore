@@ -6,6 +6,7 @@ tmp
 node_modules
 npm-debug.log
 typings
+all_typings
 src/**/*.js
 test/**/*.js
 coverage

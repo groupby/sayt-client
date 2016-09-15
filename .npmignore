@@ -3,6 +3,8 @@ coverage/
 build/
 test/
 typings/
+custom_typings/
+all_typings/
 src/
 gulpfile.js
 
