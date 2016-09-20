@@ -1,30 +1,40 @@
 var pjson = require('./package.json');
 
+var isCi = process.env.NODE_ENV === 'ci';
+
 module.exports = {
-  entry: './src/index.ts',
-
-  output: {
-    filename: pjson.name + '-' + pjson.version + '.js'
-  },
-
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
 
   resolve: {
     extensions: ['', '.ts', '.js'],
-    modulesDirectories: ['node_modules']
+    modulesDirectories: ['node_modules', 'src']
   },
 
   module: {
 
-    preLoaders: [{
-      test: /\.js$/,
-      loader: 'source-map-loader'
+    preLoaders: isCi ? [] : [{
+      test: /\.ts$/,
+      loader: 'tslint'
+    }],
+
+    postLoaders: isCi ? [] : [{
+      test: /\.ts$/,
+      loader: 'sourcemap-istanbul-instrumenter',
+      exclude: [
+        /node_modules/,
+        /test/,
+        /karma\.entry\.ts$/
+      ]
     }],
 
     loaders: [{
       test: /\.ts$/,
       exclude: /node_modules/,
-      loader: 'ts-loader'
+      loader: 'awesome-typescript',
+      query: {
+        inlineSourceMap: true,
+        sourceMap: false
+      }
     }]
   }
 };

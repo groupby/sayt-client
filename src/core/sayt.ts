@@ -1,4 +1,4 @@
-import { jsonp } from '../utils/index';
+import { jsonp } from './utils';
 import filterObject = require('filter-object');
 
 const SAYT_URL = '.groupbycloud.com/api/v1/sayt/search';
