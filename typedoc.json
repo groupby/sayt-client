@@ -5,9 +5,8 @@
   "target": "ES5",
   "out": "docs",
 
-  "includes": "all_typings/*",
   "excludeExternals": true,
-  "includeDeclarations": true,
+  "includeDeclarations": false,
 
   "ignoreCompilerErrors": true,
   "experimentalDecorators": true,
