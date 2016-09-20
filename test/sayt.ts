@@ -1,5 +1,5 @@
 import { Sayt } from '../src/core/sayt';
-import utils = require('../src/utils/index');
+import utils = require('../src/core/utils');
 import { expect } from 'chai';
 
 const CUSTOMER_ID = 'services';
