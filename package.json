@@ -9,7 +9,7 @@
   },
   "scripts": {
     "postinstall": "[ ! -d src ] || typings install",
-    "clean": "rimraf docs coverage dist node_modules all_typings typings",
+    "clean": "rimraf docs coverage dist node_modules typings",
     "pretest": "rimraf coverage",
     "test": "NODE_ENV=test karma start",
     "test+coverage": "NODE_ENV=test karma start && npm run coverage && npm run coverage:codacy",
@@ -20,8 +20,7 @@
     "coverage:codacy": "cat ./coverage/lcov.info | codacy-coverage",
     "build": "rimraf dist && tsc",
     "ci": "NODE_ENV=ci karma start --singleRun=false",
-    "typings:copy": "rimraf all_typings && cp -R typings all_typings && cp custom_typings/* all_typings",
-    "docs": "rimraf docs && npm run typings:copy && typedoc --options ./typedoc.json ./src"
+    "docs": "rimraf docs && typedoc --options ./typedoc.json ./src ./custom_typings ./typings"
   },
   "repository": {
     "type": "git",
