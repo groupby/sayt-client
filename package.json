@@ -40,6 +40,7 @@
   "devDependencies": {
     "awesome-typescript-loader": "^2.2.4",
     "chai": "^3.2.0",
+    "codacy-coverage": "^2.0.0",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
     "karma-coverage": "^1.1.1",
