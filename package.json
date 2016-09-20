@@ -46,6 +46,7 @@
     "karma-mocha": "^1.0.1",
     "karma-mocha-reporter": "^2.0.4",
     "karma-phantomjs-launcher": "^1.0.0",
+    "karma-source-map-support": "^1.2.0",
     "karma-webpack": "^1.7.0",
     "mocha": "^2.2.5",
     "object-assign": "^4.1.0",
