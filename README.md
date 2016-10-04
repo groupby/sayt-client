@@ -1,6 +1,7 @@
 GroupBy SAYT Client
 ========
 
+[![CircleCI](https://circleci.com/gh/groupby/sayt.svg?style=svg)](https://circleci.com/gh/groupby/sayt)
 ![license](https://img.shields.io/github/license/groupby/sayt.svg)
 [![npm](https://img.shields.io/npm/dm/sayt.svg)](https://www.npmjs.com/package/sayt)
 [![npm](https://img.shields.io/npm/v/sayt.svg)](https://www.npmjs.com/package/sayt)
