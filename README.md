@@ -2,6 +2,8 @@ GroupBy SAYT Client
 ========
 
 [![CircleCI](https://circleci.com/gh/groupby/sayt.svg?style=svg)](https://circleci.com/gh/groupby/sayt)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3d51351554874f41ba039792ecb82ad8)](https://www.codacy.com/app/GroupByInc/sayt?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=groupby/sayt&amp;utm_campaign=Badge_Grade)
+
 ![license](https://img.shields.io/github/license/groupby/sayt.svg)
 [![npm](https://img.shields.io/npm/dm/sayt.svg)](https://www.npmjs.com/package/sayt)
 [![npm](https://img.shields.io/npm/v/sayt.svg)](https://www.npmjs.com/package/sayt)
