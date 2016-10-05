@@ -20,8 +20,12 @@
     "coverage:codacy": "cat ./coverage/lcov.info | codacy-coverage",
     "build": "rimraf dist && tsc",
     "ci": "NODE_ENV=ci karma start --singleRun=false",
-    "docs": "rimraf docs && typedoc --options ./typedoc.json ./src ./typings"
+    "docs": "rimraf docs && typedoc --options ./typedoc.json ./src ./typings",
+    "license": "node licenseChecker.js"
   },
+  "pre-commit": [
+  "license"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/groupby/sayt.git"
@@ -40,6 +44,7 @@
     "awesome-typescript-loader": "^2.2.4",
     "chai": "^3.2.0",
     "codacy-coverage": "^2.0.0",
+    "gb-license-check": "^1.0.1",
     "karma": "^0.13.22",
     "karma-chai": "^0.1.0",
     "karma-coverage": "^1.1.1",
