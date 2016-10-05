@@ -20,7 +20,7 @@
     "coverage:codacy": "cat ./coverage/lcov.info | codacy-coverage",
     "build": "rimraf dist && tsc",
     "ci": "NODE_ENV=ci karma start --singleRun=false",
-    "docs": "rimraf docs && typedoc --options ./typedoc.json ./src ./custom_typings ./typings"
+    "docs": "rimraf docs && typedoc --options ./typedoc.json ./src ./typings"
   },
   "repository": {
     "type": "git",
