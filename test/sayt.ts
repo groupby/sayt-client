@@ -26,7 +26,7 @@ describe('SAYT', () => {
   });
 
   describe('autocomplete()', () => {
-    it('should send autocomplete query', (done) => {
+    it('should send query', (done) => {
       utils.jsonp = (url, body) => {
         expect(url).to.equal(SAYT_URL);
         expect(body.query).to.equal('skirts');
@@ -40,12 +40,19 @@ describe('SAYT', () => {
         .then(() => done());
     });
 
-    it('should configure autocomplete query', (done) => {
-      sayt.configure({ autocomplete: { numSearchTerms: 4, sortAlphabetically: true } });
+    it('should configure query', (done) => {
+      sayt.configure({
+        autocomplete: {
+          numSearchTerms: 4,
+          sortAlphabetically: true,
+          language: 'en'
+        }
+      });
       utils.jsonp = (url, body) => {
         expect(body.searchItems).to.equal(4);
         expect(body.navigationItems).to.equal(5);
         expect(body.alphabetize).to.be.true;
+        expect(body.language).to.eq('en');
         return Promise.resolve();
       };
 
@@ -67,7 +74,7 @@ describe('SAYT', () => {
   });
 
   describe('productSearch()', () => {
-    it('should send product search query', (done) => {
+    it('should send query', (done) => {
       utils.jsonp = (url, body) => {
         expect(url).to.equal(SAYT_URL);
         expect(body.query).to.equal('hats');
@@ -81,7 +88,7 @@ describe('SAYT', () => {
         .then(() => done());
     });
 
-    it('should configure autocomplete query', (done) => {
+    it('should configure query', (done) => {
       sayt.configure({ productSearch: { numProducts: 8, area: 'Other' } });
       utils.jsonp = (url, body) => {
         expect(body.area).to.equal('Other');
