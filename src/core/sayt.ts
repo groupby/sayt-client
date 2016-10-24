@@ -25,10 +25,12 @@ export class Sayt {
     Object.assign(this.config.productSearch, config.productSearch || {});
   }
 
-  autocomplete(query: string = '', config?: IQueryTimeAutocompleteConfig, cb?: SearchCallback): Promise<any> {
-    const finalConfig = Object.assign({ collection: this.config.collection }, this.config.autocomplete, config);
+  autocomplete(query: string = '', config?: QueryTimeAutocompleteConfig, cb?: SearchCallback): Promise<any> {
+    const finalConfig: QueryTimeAutocompleteConfig =
+      Object.assign({ collection: this.config.collection }, this.config.autocomplete, config);
     const response = jsonp(this.url, {
       query,
+      language: finalConfig.language,
       collection: finalConfig.collection,
       searchItems: finalConfig.numSearchTerms,
       navigationItems: finalConfig.numNavigations,
@@ -41,7 +43,7 @@ export class Sayt {
     return this.callbackOrPromise(response, cb);
   }
 
-  productSearch(query: string = '', config?: IQueryTimeProductSearchConfig, cb?: SearchCallback): Promise<any> {
+  productSearch(query: string = '', config?: QueryTimeProductSearchConfig, cb?: SearchCallback): Promise<any> {
     const finalConfig = Object.assign({ collection: this.config.collection }, this.config.productSearch, config);
     const response = jsonp(this.url, {
       query,
@@ -81,6 +83,7 @@ export interface SaytConfig {
 }
 
 export interface AutocompleteConfig {
+  language?: string;
   numSearchTerms?: number;
   numNavigations?: number;
   sortAlphabetically?: boolean;
@@ -93,6 +96,6 @@ export interface ProductSearchConfig {
   productSort?: any;
 }
 
-export type IQueryTimeAutocompleteConfig = AutocompleteConfig & { collection?: string };
-export type IQueryTimeProductSearchConfig = ProductSearchConfig & { collection?: string, refinements?: string };
+export type QueryTimeAutocompleteConfig = AutocompleteConfig & { collection?: string };
+export type QueryTimeProductSearchConfig = ProductSearchConfig & { collection?: string, refinements?: string };
 export type SearchCallback = (err: Error, res?: any) => void;
