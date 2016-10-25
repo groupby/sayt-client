@@ -44,9 +44,11 @@ export class Sayt {
   }
 
   productSearch(query: string = '', config?: QueryTimeProductSearchConfig, cb?: SearchCallback): Promise<any> {
-    const finalConfig = Object.assign({ collection: this.config.collection }, this.config.productSearch, config);
+    const finalConfig: QueryTimeProductSearchConfig =
+      Object.assign({ collection: this.config.collection }, this.config.productSearch, config);
     const response = jsonp(this.url, {
       query,
+      language: finalConfig.language,
       collection: finalConfig.collection,
       area: finalConfig.area,
       refinements: finalConfig.refinements,
@@ -91,6 +93,7 @@ export interface AutocompleteConfig {
 }
 
 export interface ProductSearchConfig {
+  language?: string;
   area?: string;
   numProducts?: number;
   productSort?: any;
