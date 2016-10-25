@@ -28,11 +28,11 @@ describe('SAYT', () => {
   describe('autocomplete()', () => {
     it('should send query', (done) => {
       utils.jsonp = (url, body) => {
-        expect(url).to.equal(SAYT_URL);
-        expect(body.query).to.equal('skirts');
-        expect(body.searchItems).to.equal(5);
-        expect(body.navigationItems).to.equal(5);
-        expect(body.productItems).to.equal(0);
+        expect(url).to.eq(SAYT_URL);
+        expect(body.query).to.eq('skirts');
+        expect(body.searchItems).to.eq(5);
+        expect(body.navigationItems).to.eq(5);
+        expect(body.productItems).to.eq(0);
         return Promise.resolve();
       };
 
@@ -49,8 +49,8 @@ describe('SAYT', () => {
         }
       });
       utils.jsonp = (url, body) => {
-        expect(body.searchItems).to.equal(4);
-        expect(body.navigationItems).to.equal(5);
+        expect(body.searchItems).to.eq(4);
+        expect(body.navigationItems).to.eq(5);
         expect(body.alphabetize).to.be.true;
         expect(body.language).to.eq('en');
         return Promise.resolve();
@@ -63,8 +63,8 @@ describe('SAYT', () => {
     it('should allow query-time configuration', (done) => {
       sayt.configure({ autocomplete: { numSearchTerms: 4, sortAlphabetically: true } });
       utils.jsonp = (url, body) => {
-        expect(body.searchItems).to.equal(8);
-        expect(body.navigationItems).to.equal(2);
+        expect(body.searchItems).to.eq(8);
+        expect(body.navigationItems).to.eq(2);
         return Promise.resolve();
       };
 
@@ -76,11 +76,11 @@ describe('SAYT', () => {
   describe('productSearch()', () => {
     it('should send query', (done) => {
       utils.jsonp = (url, body) => {
-        expect(url).to.equal(SAYT_URL);
-        expect(body.query).to.equal('hats');
-        expect(body.searchItems).to.equal(0);
-        expect(body.navigationItems).to.equal(0);
-        expect(body.productItems).to.equal(4);
+        expect(url).to.eq(SAYT_URL);
+        expect(body.query).to.eq('hats');
+        expect(body.searchItems).to.eq(0);
+        expect(body.navigationItems).to.eq(0);
+        expect(body.productItems).to.eq(4);
         return Promise.resolve();
       };
 
@@ -89,10 +89,17 @@ describe('SAYT', () => {
     });
 
     it('should configure query', (done) => {
-      sayt.configure({ productSearch: { numProducts: 8, area: 'Other' } });
+      sayt.configure({
+        productSearch: {
+          numProducts: 8,
+          area: 'Other',
+          language: 'en'
+        }
+      });
       utils.jsonp = (url, body) => {
-        expect(body.area).to.equal('Other');
-        expect(body.productItems).to.equal(8);
+        expect(body.area).to.eq('Other');
+        expect(body.productItems).to.eq(8);
+        expect(body.language).to.eq('en');
         return Promise.resolve();
       };
 
@@ -102,8 +109,8 @@ describe('SAYT', () => {
 
     it('should allow query-time configuration', (done) => {
       utils.jsonp = (url, body) => {
-        expect(body.area).to.equal('dev');
-        expect(body.productItems).to.equal(5);
+        expect(body.area).to.eq('dev');
+        expect(body.productItems).to.eq(5);
         return Promise.resolve();
       };
 
