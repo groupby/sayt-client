@@ -1,7 +1,7 @@
 import '../src/polyfills';
 
-const coreContext = (<{ context?: Function }>require).context('../src', true, /\.ts/);
+const coreContext = require.context('../src', true, /\.ts/);
 coreContext.keys().forEach(coreContext);
 
-const testContext = (<{ context?: Function }>require).context('./unit', true, /\.ts/);
+const testContext = require.context('./unit', true, /\.ts/);
 testContext.keys().forEach(testContext);
