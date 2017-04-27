@@ -7,12 +7,12 @@ export class Sayt {
 
   private config: SaytConfig = {
     autocomplete: {
+      numNavigations: 5,
       numSearchTerms: 5,
-      numNavigations: 5
     },
     productSearch: {
-      numProducts: 4
-    }
+      numProducts: 4,
+    },
   };
 
   constructor(config?: SaytConfig) {
@@ -29,15 +29,14 @@ export class Sayt {
     const finalConfig: QueryTimeAutocompleteConfig =
       Object.assign({ collection: this.config.collection }, this.config.autocomplete, config);
     const response = jsonp(this.url, {
+      alphabetize: finalConfig.sortAlphabetically,
+      collection: finalConfig.collection,
+      fuzzy: finalConfig.fuzzyMatch,
       query,
       language: finalConfig.language,
-      collection: finalConfig.collection,
-      searchItems: finalConfig.numSearchTerms,
       navigationItems: finalConfig.numNavigations,
-      alphabetize: finalConfig.sortAlphabetically,
-      fuzzy: finalConfig.fuzzyMatch,
-
-      productItems: 0
+      productItems: 0,
+      searchItems: finalConfig.numSearchTerms,
     });
 
     return this.callbackOrPromise(response, cb);
@@ -47,21 +46,20 @@ export class Sayt {
     const finalConfig: QueryTimeProductSearchConfig =
       Object.assign({ collection: this.config.collection }, this.config.productSearch, config);
     const response = jsonp(this.url, {
+      area: finalConfig.area,
+      collection: finalConfig.collection,
       query,
       language: finalConfig.language,
-      collection: finalConfig.collection,
-      area: finalConfig.area,
-      refinements: finalConfig.refinements,
+      navigationItems: 0,
       productItems: finalConfig.numProducts,
-
+      refinements: finalConfig.refinements,
       searchItems: 0,
-      navigationItems: 0
     });
 
     return this.callbackOrPromise(response, cb);
   }
 
-  private callbackOrPromise(promise: Promise<any>, cb: Function): Promise<any> {
+  private callbackOrPromise(promise: Promise<any>, cb: (error?: Error, response?: any) => void): Promise<any> {
     let response = promise;
     if (typeof cb === 'function') {
       response = promise.then((res) => cb(undefined, res))

@@ -1,40 +1,46 @@
-var pjson = require('./package.json');
+const path = require('path');
 
-var isCi = process.env.NODE_ENV === 'ci';
+// eslint-disable-next-line no-process-env
+const isCi = process.env.NODE_ENV === 'ci';
 
 module.exports = {
   devtool: 'inline-source-map',
 
   resolve: {
-    extensions: ['', '.ts', '.js'],
-    modulesDirectories: ['node_modules', 'src']
+    extensions: ['.ts', '.js'],
+    modules: [
+      'node_modules',
+      path.resolve(__dirname, 'src')
+    ]
   },
 
   module: {
 
-    preLoaders: isCi ? [] : [{
-      test: /\.ts$/,
-      loader: 'tslint'
-    }],
-
-    postLoaders: isCi ? [] : [{
-      test: /\.ts$/,
-      loader: 'sourcemap-istanbul-instrumenter',
-      exclude: [
-        /node_modules/,
-        /test/,
-        /karma\.entry\.ts$/
-      ]
-    }],
-
-    loaders: [{
-      test: /\.ts$/,
-      exclude: /node_modules/,
-      loader: 'awesome-typescript',
-      query: {
-        inlineSourceMap: true,
-        sourceMap: false
-      }
-    }]
+    rules:
+      (isCi ? [{
+        test: /\.ts$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
+        options: {
+          // typeCheck: true
+        }
+      }, {
+        test: /\.ts$/,
+        exclude: [
+          path.resolve(__dirname, 'node_modules'),
+          path.resolve(__dirname, 'test'),
+          path.resolve(__dirname, 'test/karma.entry.ts')
+        ],
+        loader: 'sourcemap-istanbul-instrumenter-loader'
+      }] : [])
+      .concat({
+        test: /\.ts$/,
+        exclude: path.resolve(__dirname, 'node_modules'),
+        loader: 'awesome-typescript-loader',
+        options: {
+          sourceMap: false,
+          inlineSourceMap: true
+        }
+      })
   }
 };
