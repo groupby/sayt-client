@@ -1,5 +1,5 @@
-import { Sayt } from '../src/core/sayt';
-import utils = require('../src/core/utils');
+import { Sayt } from '../../src/core/sayt';
+import utils = require('../../src/core/utils');
 import { expect } from 'chai';
 
 const CUSTOMER_ID = 'services';
@@ -45,8 +45,8 @@ describe('SAYT', () => {
         autocomplete: {
           numSearchTerms: 4,
           sortAlphabetically: true,
-          language: 'en'
-        }
+          language: 'en',
+        },
       });
       utils.jsonp = (url, body) => {
         expect(body.searchItems).to.eq(4);
@@ -93,8 +93,8 @@ describe('SAYT', () => {
         productSearch: {
           numProducts: 8,
           area: 'Other',
-          language: 'en'
-        }
+          language: 'en',
+        },
       });
       utils.jsonp = (url, body) => {
         expect(body.area).to.eq('Other');
