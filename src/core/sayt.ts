@@ -52,6 +52,7 @@ export class Sayt {
       language: finalConfig.language,
       navigationItems: 0,
       productItems: finalConfig.numProducts,
+      productSort: finalConfig.productSort,
       refinements: finalConfig.refinements,
       searchItems: 0,
     });

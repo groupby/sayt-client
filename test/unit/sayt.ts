@@ -94,12 +94,14 @@ describe('SAYT', () => {
           numProducts: 8,
           area: 'Other',
           language: 'en',
+          productSort: '~field:Descending',
         },
       });
       utils.jsonp = (url, body) => {
         expect(body.area).to.eq('Other');
         expect(body.productItems).to.eq(8);
         expect(body.language).to.eq('en');
+        expect(body.productSort).to.eq('~field:Descending');
         return Promise.resolve();
       };
 
