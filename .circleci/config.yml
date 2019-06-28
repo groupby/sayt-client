@@ -43,7 +43,11 @@ jobs:
     unit_test:
         <<: *image
         steps:
-            - run: npm run test+coverage
+            - attach_workspace:
+                at: ~/
+            - run:
+                name: Test
+                command: yarn test+coverage
 
     publish:
         <<: *image
