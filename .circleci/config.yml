@@ -1,4 +1,5 @@
 version: 2
+
 jobs:
   build:
     steps:
@@ -26,6 +27,6 @@ workflows:
   build_test:
     jobs:
       - build
-      - unit_test
+      - unit_test:
         requires:
           - build
