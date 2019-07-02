@@ -52,7 +52,10 @@ jobs:
         steps:
             - attach_workspace:
                 at: ~/
-            - run: echo "//registry.npmjs.org/:_authToken=${NPM_API_KEY}" > ~/.npmrc
+            # - run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+            - run:
+                name: Authenticate with registry
+                command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
             - run: npm publish
 
 workflows:
