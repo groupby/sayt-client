@@ -69,5 +69,6 @@ workflows:
                 requires:
                     - build
             - publish:
+                context: org-global
                 requires:
                     - unit_test
