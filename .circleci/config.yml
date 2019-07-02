@@ -57,7 +57,7 @@ jobs:
                 command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
             - run:
                 name: Publish package
-                command: npm publish
+                command: npm publish --tag temp
 
 workflows:
     version: 2
@@ -70,5 +70,10 @@ workflows:
                     - build
             - publish:
                 context: org-global
+                filters:
+                    branches:
+                        only:
+                            - develop
+                            - SFX-143
                 requires:
                     - unit_test
