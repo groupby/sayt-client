@@ -1,0 +1,72 @@
+defaults:
+    image: &image
+        docker:
+            - image: circleci/node:11.6.0
+    yarn_cache: &yarn_cache
+        key: yarn_cache-v{{ .Environment.CACHE_VERSION }}-{{ .Branch }}-{{ checksum "yarn.lock" }}
+    yarn_install: &yarn_install
+        name: Install
+        command: yarn
+    persist_repo: &persist_repo
+        root: ~/
+        paths:
+            - project
+
+version: 2
+
+jobs:
+    build:
+        <<: *image
+        steps:
+            - checkout
+            - attach_workspace:
+                at: ~/
+            - restore_cache: *yarn_cache
+            - run: *yarn_install
+            - save_cache:
+                <<: *yarn_cache
+                paths:
+                    - ~/.cache/yarn
+            - run:
+                name: Build
+                command: yarn build
+            - persist_to_workspace: *persist_repo
+
+    unit_test:
+        <<: *image
+        steps:
+            - attach_workspace:
+                at: ~/
+            - run:
+                name: Test
+                command: yarn test+coverage
+
+    publish:
+        <<: *image
+        steps:
+            - attach_workspace:
+                at: ~/
+            - run:
+                name: Authenticate with registry
+                command: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
+            - run:
+                name: Publish package
+                command: npm publish
+
+workflows:
+    version: 2
+
+    build_test_publish:
+        jobs:
+            - build
+            - unit_test:
+                requires:
+                    - build
+            - publish:
+                context: org-global
+                filters:
+                    branches:
+                        only:
+                            - develop
+                requires:
+                    - unit_test
