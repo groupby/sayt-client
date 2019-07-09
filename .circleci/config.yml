@@ -7,12 +7,6 @@ defaults:
     yarn_install: &yarn_install
         name: Install
         command: yarn
-    setup_git: &setup_git
-        name: Setup Git user
-        command: |
-            git config --global user.email "ops@groupbyinc.com"
-            git config --global user.name "GroupBy Ops"
-            git config --global push.default simple
     persist_repo: &persist_repo
         root: ~/
         paths:
