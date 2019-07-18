@@ -25,7 +25,7 @@ export class Sayt {
     Object.assign(this.config.productSearch, config.productSearch || {});
   }
 
-  autocomplete(query: string = '', config?: QueryTimeAutocompleteConfig, cb?: SearchCallback): Promise<any> {
+  autocomplete(query: string = '', config?: QueryTimeAutocompleteConfig, cb?: SearchCallback): Promise<AutocompleteResponse> {
     const finalConfig: QueryTimeAutocompleteConfig =
       Object.assign({ collection: this.config.collection }, this.config.autocomplete, config);
     const response = jsonp(this.url, {
@@ -42,7 +42,7 @@ export class Sayt {
     return this.callbackOrPromise(response, cb);
   }
 
-  productSearch(query: string = '', config?: QueryTimeProductSearchConfig, cb?: SearchCallback): Promise<any> {
+  productSearch(query: string = '', config?: QueryTimeProductSearchConfig, cb?: SearchCallback): Promise<AutocompleteResponse> {
     const finalConfig: QueryTimeProductSearchConfig =
       Object.assign({ collection: this.config.collection }, this.config.productSearch, config);
     const response = jsonp(this.url, {
@@ -96,6 +96,42 @@ export interface ProductSearchConfig {
   area?: string;
   numProducts?: number;
   productSort?: any;
+}
+
+export interface AutocompleteResponse {
+  status: {
+    code: number;
+    internalCode: number;
+    message: 'string';
+    additionalInfo: any;
+    serverTimeStamp: number;
+  }
+  result: {
+    stats: {
+      navigationCount: number;
+      searchCount: number;
+      productCount: number;
+      autocompleteResponse: number;
+      productSearchResponse: number;
+    }
+    searchTerms: AutocompleteSearchTerm[] | null;
+    navigations: AutocompleteNavigation[] | null;
+    products: any;
+  }
+}
+
+export interface AutocompleteSearchTerm {
+  additionalInfo: {
+    [key: string]: any;
+  }
+  distanceToDepluralized: number;
+  distanceToSearch: number;
+  value: string;
+}
+
+export interface AutocompleteNavigation {
+  name: string;
+  values: string[];
 }
 
 export type QueryTimeAutocompleteConfig = AutocompleteConfig & { collection?: string };
