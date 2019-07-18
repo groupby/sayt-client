@@ -102,7 +102,7 @@ export interface AutocompleteResponse {
   status: {
     code: number;
     internalCode: number;
-    message: 'string';
+    message: string;
     additionalInfo: any;
     serverTimeStamp: number;
   }
