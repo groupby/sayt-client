@@ -116,7 +116,7 @@ export interface AutocompleteResponse {
     }
     searchTerms: AutocompleteSearchTerm[] | null;
     navigations: AutocompleteNavigation[] | null;
-    products: AutocompleteRecord[] | null;
+    products: AutocompleteProduct[] | null;
   }
 }
 
@@ -134,7 +134,7 @@ export interface AutocompleteNavigation {
   values: string[];
 }
 
-export interface AutocompleteRecord {
+export interface AutocompleteProduct {
   id: string;
   url: string;
   title: string;
