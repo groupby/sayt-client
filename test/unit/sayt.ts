@@ -1,4 +1,4 @@
-import { Sayt } from '../../src/core/sayt';
+import { Sayt, SaytConfig, QueryTimeAutocompleteConfig } from '../../src/core/sayt';
 import utils = require('../../src/core/utils');
 import { expect } from 'chai';
 
@@ -41,11 +41,12 @@ describe('SAYT', () => {
     });
 
     it('should configure query', (done) => {
-      sayt.configure({
+      sayt.configure(<SaytConfig>{
         autocomplete: {
           numSearchTerms: 4,
           sortAlphabetically: true,
           language: 'en',
+          a: 'b',
         },
       });
       utils.jsonp = (url, body) => {
@@ -53,6 +54,7 @@ describe('SAYT', () => {
         expect(body.navigationItems).to.eq(5);
         expect(body.alphabetize).to.be.true;
         expect(body.language).to.eq('en');
+        expect(body.a).to.eq('b');
         return Promise.resolve();
       };
 
@@ -65,10 +67,11 @@ describe('SAYT', () => {
       utils.jsonp = (url, body) => {
         expect(body.searchItems).to.eq(8);
         expect(body.navigationItems).to.eq(2);
+        expect(body.a).to.eq('b');
         return Promise.resolve();
       };
 
-      sayt.autocomplete('skirts', { numSearchTerms: 8, numNavigations: 2 })
+      sayt.autocomplete('skirts', <QueryTimeAutocompleteConfig>{ numSearchTerms: 8, numNavigations: 2, a: 'b' })
         .then(() => done());
     });
   });

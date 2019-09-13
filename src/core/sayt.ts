@@ -28,15 +28,25 @@ export class Sayt {
   autocomplete(query: string = '', config?: QueryTimeAutocompleteConfig, cb?: SearchCallback): Promise<AutocompleteResponse> {
     const finalConfig: QueryTimeAutocompleteConfig =
       Object.assign({ collection: this.config.collection }, this.config.autocomplete, config);
+    const {
+      sortAlphabetically: alphabetize,
+      collection,
+      fuzzyMatch: fuzzy,
+      language,
+      numNavigations: navigationItems,
+      numSearchTerms: searchItems,
+      ...rest
+    } = finalConfig;
     const response = jsonp(this.url, {
-      alphabetize: finalConfig.sortAlphabetically,
-      collection: finalConfig.collection,
-      fuzzy: finalConfig.fuzzyMatch,
+      alphabetize,
+      collection,
+      fuzzy,
       query,
-      language: finalConfig.language,
-      navigationItems: finalConfig.numNavigations,
+      language,
+      navigationItems,
       productItems: 0,
-      searchItems: finalConfig.numSearchTerms,
+      searchItems,
+      ...rest
     });
 
     return this.callbackOrPromise(response, cb);
