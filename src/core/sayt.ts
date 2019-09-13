@@ -99,6 +99,7 @@ export interface AutocompleteConfig {
   numNavigations?: number;
   sortAlphabetically?: boolean;
   fuzzyMatch?: boolean;
+  matchPrefix?: boolean;
 }
 
 export interface ProductSearchConfig {
